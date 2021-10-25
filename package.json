@@ -1,0 +1,11 @@
+{
+  "name": "dofus_clone",
+  "version": "1.0.0",
+  "description": "Simple dofus clone",
+  "main": "app.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
+  },
+  "author": "",
+  "license": "ISC"
+}

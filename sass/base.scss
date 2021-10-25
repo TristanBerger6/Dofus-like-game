@@ -1,0 +1,21 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;// elemnt inherit its box-sizing from its parent
+}
+
+
+body {
+    box-sizing: border-box; // padding + border included in width
+    font-size: 16px;  
+}
+
+.main-game-view{
+    width : 100vw;
+    height : 100vh;
+    background: url("../img/map.png") no-repeat;
+    background-size: 100% 100%;
+    border: 1px solid black;
+}
