@@ -1,4 +1,10 @@
-@import "base";
-@import "app";
+@import "_base";
+@import "_variables";
+@import "_mixins";
+@import "_audio";
+
+@import "./pages/_start-page";
+@import "./pages/_end-page";
+@import "./pages/_home-game";
 
 

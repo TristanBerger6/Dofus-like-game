@@ -1,0 +1,21 @@
+// ----------- PIXEL - VIEWPORT CONVERSION ------------ //
+// the game was designed in 1920*980px at first
+// Want to conserve the ratio 1920:980
+$vhWithRatio : 980vw/1920;
+
+$pxToVw : 100vw/1920; // pixel value for 1920px width conserve its proportion with change of viewport
+$pxToVh : 100*$vhWithRatio/980; // pixel value for 980px height conserve its proportion with change of viewport 
+
+
+// -------- PAGES COLOR -------------//
+
+$game-background : rgb(38, 37, 43);
+$game-color : rgb(151, 150, 153);
+$game-hover : rgb(74, 72, 83);
+$game-box-shadow : rgb(100,100,100,0.2);
+
+$home-color : rgb(38, 37, 43);
+$home-background: rgb(215, 221, 185);
+
+$start-color : rgb(54,32,16);
+

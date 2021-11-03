@@ -1,0 +1,26 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;// elemnt inherit its box-sizing from its parent
+}
+
+
+body {
+    box-sizing: border-box; // padding + border included in width
+    font-size: 1vw;  
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    overflow: hidden;
+    /*@media all and (max-width : 1024px) {
+        font-size : 9px;
+    }
+    @media all and (min-width : 2400px) {
+        font-size : 23px;
+    }*/
+
+
+}
+
+

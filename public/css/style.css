@@ -8,19 +8,499 @@
 
 body {
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 1vw;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  overflow: hidden;
+  /*@media all and (max-width : 1024px) {
+      font-size : 9px;
+  }
+  @media all and (min-width : 2400px) {
+      font-size : 23px;
+  }*/
 }
 
-.main-game-view {
+#mute-songs {
+  position: absolute;
+  z-index: 10;
+  top: 1.0416666667vw;
+  left: 1.0416666667vw;
+  width: 2.6041666667vw;
+  height: 2.6041666667vw;
+}
+
+#start-page {
+  position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 51.0416666667vw;
+  background: url("../img/map_blurred.png") no-repeat;
+  background-size: 100% 100%;
+  z-index: 20;
+  color: #362010;
+}
+
+.text {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.text .clofus-logo {
+  width: 12.2916666667vw;
+  height: 7.96875vw;
+  background: url("../img/clofus2.png") no-repeat;
+  background-size: 100% 100%;
+}
+.text p {
+  margin-bottom: 2.6041666667vw;
+}
+
+.start__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 7.8125vw;
+  height: 3.6458333333vw;
+  font-weight: bold;
+  letter-spacing: 0.1041666667vw;
+}
+.start__btn #start-page-btn {
+  color: #362010;
+  position: absolute;
+  top: -4;
+  left: -4;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.start__btn #start-page-btn:hover {
+  cursor: pointer;
+}
+.start__btn #start-page-btn .outline {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.start__btn #start-page-btn .outline:hover .top {
+  stroke-dashoffset: -205%;
+}
+.start__btn #start-page-btn .outline:hover .bot {
+  stroke-dashoffset: -430%;
+}
+.start__btn #start-page-btn .outline__rectangle {
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  stroke-width: 0.2083333333vw;
+  stroke-dasharray: 70% 330%;
+  fill: none;
+  stroke: #362010;
+  transition: stroke-dashoffset 500ms ease-in-out;
+}
+.start__btn #start-page-btn .outline__rectangle.top {
+  stroke-dashoffset: -30%;
+}
+.start__btn #start-page-btn .outline__rectangle.bot {
+  stroke-dashoffset: -205%;
+}
+
+#end-page {
+  position: absolute;
+  width: 100vw;
+  height: 51.0416666667vw;
+  background: black;
+  color: #979699;
+  background-size: 100% 100%;
+  text-align: center;
+  z-index: -2;
+}
+#end-page .end-page-bloc {
+  width: 26.0416666667vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10.4166666667vw;
+}
+#end-page #end-page-btnWin, #end-page #end-page-btnLose {
+  margin-top: 2.6041666667vw;
+  font-size: 1rem;
+  width: 10.4166666667vw;
+  height: 3.125vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background: #26252b;
+  box-shadow: 2px 2px 2px rgba(100, 100, 100, 0.2);
+  border-radius: 5px;
+}
+#end-page #end-page-btnWin:hover, #end-page #end-page-btnLose:hover {
+  cursor: pointer;
+  background: #4a4853;
+}
+#end-page h2 {
+  font-size: 4rem;
+}
+#end-page p {
+  font-size: 1.5rem;
+}
+
+#end-page-win, #end-page-lose {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  transform: scaleZ(0);
+}
+#end-page-win .icon-win, #end-page-win .icon-lose, #end-page-lose .icon-win, #end-page-lose .icon-lose {
+  width: 5.2083333333vw;
+  height: 5.2083333333vw;
+  margin: 1.0416666667vw;
+  background-size: 100% 100%;
+}
+
+.icon-win {
+  background: url("../img/pourpre.png") no-repeat;
+}
+
+.icon-lose {
+  background: url("../img/skull.png") no-repeat;
+}
+
+#home-page {
+  position: absolute;
+  width: 100vw;
+  height: 51.0416666667vw;
   background: url("../img/map.png") no-repeat;
   background-size: 100% 100%;
-  border: 1px solid black;
+  z-index: 1;
 }
 
-canvas {
+#player {
   position: absolute;
+  z-index: 99;
+}
+
+#home-grid {
+  position: absolute;
+  z-index: 10;
+}
+
+#portal {
+  width: 2vw;
+  height: 1.53125vw;
+  background: url("../img/portal5.png") no-repeat;
+  background-size: 100% 100%;
+  top: 21.875vw;
+  left: 38.0208333333vw;
+  opacity: 1;
+  position: absolute;
+  z-index: 20;
+}
+#portal:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#pnj-interrogation {
+  position: absolute;
+  z-index: 99;
+  top: 13.4583333333vw;
+  left: 57vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+#pnj-interrogation #interrogation {
+  width: 1.0416666667vw;
+  height: 2.0833333333vw;
+  background: url("../img/interrogation.png") no-repeat;
+  background-size: 100% 100%;
+}
+#pnj-interrogation #pnj {
+  width: 3.6458333333vw;
+  height: 6.40625vw;
+  background: url("../img/pnj.png") no-repeat;
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+
+#pnj-text {
+  position: absolute;
+  z-index: 99;
+  top: 11.2291666667vw;
+  left: 61vw;
+  border-radius: 5px;
+  border: 0.2604166667vw solid #26252b;
+  color: #26252b;
+  background: #d7ddb9;
+  text-align: justify;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  transform: scaleZ(0);
+}
+#pnj-text #cross {
+  align-self: flex-end;
+  margin: 0.2604166667vw;
+  width: 1.0416666667vw;
+  height: 1.0416666667vw;
+  background: url("../img/cross_dark.png") no-repeat;
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+#pnj-text p {
+  width: 20vw;
+  padding: 0.5208333333vw;
+  padding-top: 0px;
+}
+
+#game-page {
+  position: absolute;
+  width: 100vw;
+  height: 51.0416666667vw;
+  background: black;
+  z-index: -1;
+}
+
+.life-pass-quit {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  bottom: 2.0416666667vw;
+  left: 3vw;
+  width: 14.5833333333vw;
+}
+.life-pass-quit .pv {
+  width: 4.5833333333vw;
+  height: 4.5833333333vw;
+  background: url("../img/Life4.png");
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.life-pass-quit .pv__text {
+  color: white;
+}
+.life-pass-quit .btn {
+  width: 3.6458333333vw;
+  height: 2.0833333333vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  color: #979699;
+  background: #26252b;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(100, 100, 100, 0.2);
+  font-weight: 600;
+}
+.life-pass-quit .btn:hover {
+  cursor: pointer;
+  background: #4a4853;
+}
+
+.mob {
+  position: absolute;
+  z-index: 1;
+  width: 6vw;
+  height: 5.1041666667vw;
+}
+.mob:hover {
+  cursor: pointer;
+}
+.mob:hover p {
+  opacity: 1;
+}
+.mob p {
+  text-align: center;
+  border-radius: 5px;
+  padding: 0.2604166667vw;
+  background: #26252b;
+  width: 8.8541666667vw;
+  position: relative;
+  top: -3.6458333333vw;
+  color: #979699;
+  border: 1px solid #fcfcfc;
+  opacity: 0;
+}
+
+.Round {
+  position: absolute;
+  width: 7.8125vw;
+  height: 2.34375vw;
+  background: #26252b;
+  color: #979699;
+  border-radius: 5px;
+  bottom: 9.3125vw;
+  left: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  font-weight: 600;
+  box-shadow: 2px 2px 2px rgba(100, 100, 100, 0.2);
+}
+.Round__text {
+  font-size: 1.5rem;
+}
+
+.nextRound {
+  position: absolute;
+  z-index: 4;
+  top: 10.2083333333vw;
+  right: 0.5208333333vw;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  width: 11.4583333333vw;
+}
+.nextRound__openClose {
+  position: relative;
+  top: 2px;
+  width: 1.0416666667vw;
+  height: 1.0416666667vw;
+  background: url("../img/arrow.png"), #26252b;
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+.nextRound__table {
+  width: 10.4166666667vw;
+  color: #979699;
+  background: #26252b;
+  transform-origin: right;
+  transform: scaleX(1);
+  transition: transform 20ms;
+}
+.nextRound__table table {
+  width: 100%;
+  border-collapse: collapse;
+  vertical-align: center;
+}
+.nextRound__table tr {
+  border: 2px solid black;
+}
+.nextRound__table td, .nextRound__table th {
+  padding-top: 0.5208333333vw;
+  padding-bottom: 0.2604166667vw;
+  width: 4.1666666667vw;
+}
+
+.rock {
+  position: absolute;
+  width: 2.5vw;
+  height: 2.0416666667vw;
+  background: url("../img/rocks.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.rules {
+  position: absolute;
+  z-index: 2;
+  top: 4.1666666667vw;
+  left: 0.5208333333vw;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 21.9791666667vw;
+}
+.rules__openClose {
+  position: relative;
+  width: 1.0416666667vw;
+  height: 1.0416666667vw;
+  background: url("../img/arrow.png"), #26252b;
+  background-size: 100% 100%;
+  transform: rotateZ(180deg);
+  cursor: pointer;
+}
+.rules__text {
+  width: 20.8333333333vw;
+  border-radius: 5px;
+  color: #979699;
+  background: #26252b;
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform 20ms;
+  text-align: justify;
+  padding-left: 1.0416666667vw;
+  padding-right: 1.0416666667vw;
+}
+.rules__text h2 {
+  text-align: Center;
+  padding: 0.5208333333vw;
+}
+.rules__text p {
+  padding-bottom: 1.0416666667vw;
+}
+
+#pourpre {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.6041666667vw;
+  height: 2.6041666667vw;
+  background: url("../img/pourpre.png") no-repeat;
+  background-size: 100%;
+}
+#pourpre:hover {
+  cursor: pointer;
+}
+#pourpre:hover p {
+  opacity: 1;
+}
+#pourpre p {
+  position: relative;
+  text-align: center;
+  width: 10.4166666667vw;
+  padding: 0.2604166667vw;
+  background: #26252b;
+  color: #979699;
+  border: 1px solid #fcfcfc;
+  border-radius: 5px;
+  top: -3.125vw;
+  left: -3.90625vw;
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

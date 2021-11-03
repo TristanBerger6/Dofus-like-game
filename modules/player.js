@@ -1,4 +1,4 @@
-import { vw,vh,cellWidth,cellHeight } from "./const.js";
+import { vw,vh,cellWidth,cellHeight,PVStart} from "./const.js";
 import { getTimeMilli } from "./utils.js";
 import { Dijkstra_init, Dijkstra } from './dijkstra.js'
 
@@ -6,13 +6,13 @@ import { Dijkstra_init, Dijkstra } from './dijkstra.js'
 let animPerCell = 10;
 let forwardStepX = cellWidth/animPerCell;   // px 
 let forwardStepY = cellHeight/animPerCell;   //px
-let FPS = 40;  // 25Hz => 40ms
+let FPS = 60;  // 25Hz => 40ms
 
 
 // -------------- Canvas Player creation -----------------//
 
 let playerMoveOrigin = [Math.round(35*vw/1920),Math.round(85*vh/980)];   // x,y coords of the foot in the canvas
-let playerCanvas = document.getElementById("player");
+export let playerCanvas = document.getElementById("player");
 playerCanvas.width = Math.round(69*vw/1920);  // canvas dimensions
 playerCanvas.height = Math.round(100*vh/980);
 
@@ -38,6 +38,7 @@ export class Player{
         this.posY = this.myGrid.grid[startCellI][startCellJ].coordY-playerMoveOrigin[1]; 
         this.canvas.style.top = this.posY+"px";
         this.canvas.style.left = this.posX+"px";
+        
 
         // Sprite
         this.row = spriteRow;
@@ -58,25 +59,42 @@ export class Player{
         this.lastClick = null;
         this.newClick = null;
 
-        document.addEventListener("click", async function(event){
+        // Game mode
+        this.proposedCell = [];
+        this.PV = PVStart;
+        this.GridEventOn();
 
-            this.newClick = getTimeMilli(); // To avoid spam clicking
-            if ( (this.newClick - this.lastClick)<1000 ) { return;}  
-            this.lastClick = this.newClick;
-        
-            let xClick = event.clientX;
-            let yClick = event.clientY;
-            if ( this.inMotion == false){ // no motion in progress
-                self.movementPlayerOnClick(xClick,yClick).then(() => this.inMotion = false); 
-            } 
-            else{ // motion in progress, stop the motion in progress, wait 1s and start the new motion
-                this.newMotion = true;
-                setTimeout(()=>{
-                    self.movementPlayerOnClick(xClick,yClick).then(() => this.inMotion = false);
-                }, 1000);
-            }  
-        });
     }  
+
+    async GridEventOn() {
+        this.myGrid.eltGrid.addEventListener("click", this.GridEventOnCallback );
+    }
+    async GridEventOnCallback(event){
+        this.newClick = getTimeMilli(); // To avoid spam clicking
+        if ( (this.newClick - this.lastClick)<1000) { return;}  
+        this.lastClick = this.newClick;
+    
+        let xClick = event.clientX + window.scrollX;
+        let yClick = event.clientY + window.scrollY;
+
+        let aimCell = self.closestCell(xClick,yClick,self.myGrid); // get the aimed cell 
+        if ( aimCell == null || aimCell.state == "unclickable" ){
+            return;
+        }
+
+  
+        if ( self.inMotion == false){ // no motion in progress
+            self.movementPlayerOnClick(xClick,yClick).then(() => self.inMotion = false); 
+        } 
+        else{ // motion in progress, stop the motion in progress, wait 1s and start the new motion
+            self.newMotion = true;
+            setTimeout(()=>{
+                self.movementPlayerOnClick(xClick,yClick).then(() => self.inMotion = false);
+            }, 1000);
+        }  
+    
+    }
+    
 
     // when a click is detected on the windows, bring the player to the position of the click 
     async movementPlayerOnClick(xClick,yClick){
@@ -85,9 +103,7 @@ export class Player{
         this.newMotion = false;
 
         let aimCell = this.closestCell(xClick,yClick,this.myGrid); // get the aimed cell 
-        if ( aimCell.state == "unclickable"){
-            return;
-        }
+        
 
         Dijkstra_init(this.myGrid,this.currentCell); // Path finding algorithm
         let listOfCells = Dijkstra(this.myGrid,this.currentCell,aimCell); // return the path as a list of cell to go to
@@ -115,6 +131,7 @@ export class Player{
             if (this.newMotion == true){ break;} // new motion detected, stop on this cell
             
         }
+
         return ;
     }
 
@@ -122,7 +139,7 @@ export class Player{
 
         this.ctxCanvas.clearRect(0,0,this.canvas.width,this.canvas.height);
         let currentRow = this.quadrantToRow(quadrant); // get the row of the sprite according to the quadrant
-        if ( (last == true) && (i == animPerCell-1)){ // last image, first columns of the sprite
+        if ( (last == true) && (i == animPerCell-1)){ // if last image, set the first columns of the sprite
             this.ctxCanvas.drawImage(this.spriteImage,0,0,this.spriteImage.width,this.spriteImage.height,0,-this.canvas.height*currentRow,this.canvas.width*this.col,this.canvas.height*this.row);
         }
         else{ // display the new image
@@ -178,8 +195,70 @@ export class Player{
                 }
             }
         }
-    return theCell;
+        return theCell;
     }
+
+    testInCell(xClick,yClick,cell,myGrid){ // test if the click is in the specific cell
+        let distCellX = null;
+        let distCellY = null;
+        distCellX = Math.abs(xClick - myGrid.grid[cell.i][cell.j].coordX);
+        distCellY = Math.abs(yClick - myGrid.grid[cell.i][cell.j].coordY);
+        if ( distCellY <= -(cellHeight/cellWidth)*distCellX + cellHeight ){ // cells are lozenges, check if y < -ax +b 
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    teleportTo(i,j){
+        if ( (i <= this.myGrid.row-1) && (i>=0) && (j <= this.myGrid.col-1) && (j>=0)){
+            this.posX = this.myGrid.grid[i][j].coordX-playerMoveOrigin[0] ;
+            this.posY = this.myGrid.grid[i][j].coordY-playerMoveOrigin[1] ;
+            this.canvas.style.top = this.posY+"px";
+            this.canvas.style.left = this.posX+"px";
+            this.currentCell = this.myGrid.grid[i][j];
+        }
+    }
+
+    proposeCell(){ // propose available cells around the player
+        let proposedCell = [];
+        let coeff = [[1,0],[0,1],[-1,0],[0,-1]]; // right bot left top
+        for ( let c of coeff ){
+            let propI = this.currentCell.i+c[0];
+            let propJ = this.currentCell.j+c[1];
+            if ( propI >=0  &&  propJ >= 0 && propI <=this.myGrid.row-1  && propJ <= this.myGrid.col-1 ){
+                if(this.myGrid.grid[propI][propJ].state == "clickable"){
+                    proposedCell.push(this.myGrid.grid[propI][propJ]);
+                    this.myGrid.grid[propI][propJ].eltCell.setAttribute("fill","green");
+                    this.myGrid.grid[propI][propJ].eltCell.style.cursor = 'pointer';
+                    this.myGrid.grid[propI][propJ].eltCell.addEventListener("mouseover",this.cellMouseOver);
+                    
+                }
+            } 
+        }
+        this.proposedCell = proposedCell;
+    }
+
+    defaultCell(){ // erase the modification made on the proposed cells
+        for ( let cell of this.proposedCell ){
+            this.myGrid.grid[cell.i][cell.j].eltCell.setAttribute("fill",this.myGrid.fill);
+            this.myGrid.grid[cell.i][cell.j].eltCell.setAttribute("stroke","rgb(147,152,122)");
+            this.myGrid.grid[cell.i][cell.j].eltCell.style.cursor = 'default';
+            this.myGrid.grid[cell.i][cell.j].eltCell.removeEventListener("mouseover",this.cellMouseOver);
+            this.myGrid.grid[cell.i][cell.j].eltCell.removeEventListener("mouseout",this.cellMouseOut);
+        }   
+        this.proposedCell = [];  
+    }
+  
+    cellMouseOver(event){
+        event.target.setAttribute("fill","rgb(110, 204, 110)");
+        event.target.addEventListener("mouseout",self.cellMouseOut);
+    }
+    cellMouseOut(event){
+        event.currentTarget.setAttribute("fill","green");
+    }
+    
 }
 
 

@@ -8,12 +8,12 @@ export function Dijkstra_init(myGrid,currentCell) {
 	pathFound=false;
 	for (i=0;i<myGrid.row;i++) {
 		for (j=0;j<myGrid.col;j++) {
-			myGrid.grid[i][j].distance=99999; // every cell has an infinite distance, ans is to explore
+			myGrid.grid[i][j].distance=99999; // every cell has an infinite distance, and is to explore
 			myGrid.grid[i][j].toExplore=true;
 		}
 	}
 	myGrid.grid[currentCell.i][currentCell.j].distance=0; // except the starting cell which as 0 as a distance
-	predecessor=new Array(myGrid.row); // reset predecessor array, containing the previous cell of each cell
+	predecessor=new Array(myGrid.row); // reset predecessor array, containing the previous cell of each cell, the key to get the final path
     for (let i =0; i< myGrid.row;i++){
         predecessor[i] = new Array(myGrid.col);
     }
@@ -32,11 +32,17 @@ export function Dijkstra(myGrid,currentCell,aimCell) {
                 for (let i=-1;i<=1;i++) { // update distances around this cell
                     for (let j=-1;j<=1;j++) {
                         if (!(i==0 && j==0)) { // make sure that the dimensions of the grid are not exceeded
-                            min.i == 0 ? i >=0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null :null;
-                            min.j == 0 ? j >=0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null :null;
-                            min.i == myGrid.row-1 ? i <=0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null :null;
-                            min.j == myGrid.col-1 ? j <=0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null :null;
+                            min.i == 0 && i >=0 && min.j != myGrid.col-1 && min.j != 0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) :null;
+                            min.j == 0 && j >=0 && min.i != myGrid.row-1 && min.i != 0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) :null;
+                            min.i == myGrid.row-1 && i <=0 && min.j != myGrid.col-1 && min.j != 0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null;
+                            min.j == myGrid.col-1 && j <=0 && min.i != myGrid.row-1 && min.i != 0 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null;
                             min.i>0 && min.j>0 && min.i<myGrid.row-1 && min.j<myGrid.col-1 ?  Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null;
+
+							// 4 corners 
+							min.i == 0 && min.j ==0 && i>= 0 && j >= 0 ? Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null;
+							min.i == 0 && min.j ==myGrid.col-1 && i>= 0 && j <= 0 ? Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null;
+							min.i == myGrid.row-1 && min.j == myGrid.col-1 && i<= 0 && j <= 0 ? Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null;
+							min.i == myGrid.row-1 && min.j ==0 && i<= 0 && j >= 0 ? Dijkstra_maj_distances(myGrid,min.i,min.j,min.i+i,min.j+j) : null;
 
                            
                         }
@@ -107,7 +113,7 @@ function Dijkstra_weights(myGrid,i1,j1,i2,j2) {
 	}
 }
 
-function Dijkstra_explored_all(myGrid) { // check if all cell are explored
+function Dijkstra_explored_all(myGrid) { // check if all cells are explored
 	let i,j;
 	let exploredAll=true; 
 	for (i=myGrid.row-1;i>=0;i--) {

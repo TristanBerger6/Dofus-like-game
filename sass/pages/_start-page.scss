@@ -1,0 +1,104 @@
+#start-page{
+    position : absolute;
+    width : 100vw;
+    height : 100*$vhWithRatio; //added
+    background: url("../img/map_blurred.png") no-repeat;
+    background-size: 100% 100%;
+    z-index : 20;
+    color : $start-color;
+   
+}
+
+.text{
+    width : 50%;
+    @include flex(space-between,center,column,nowrap);
+    margin-top : 10%;
+    margin-left : auto;
+    margin-right : auto;
+    text-align: center;
+
+    .clofus-logo{
+        width : 236*$pxToVw;
+        height : 153*$pxToVh;
+        background: url("../img/clofus2.png") no-repeat;
+        background-size : 100% 100%;
+    }
+   
+
+    p{
+        margin-bottom: 50*$pxToVh;
+    }
+}
+
+
+.start__btn{
+
+    @include flex(center,center,row,nowrap);
+    position: relative; // to position its child
+    width: 150*$pxToVw;
+    height: 70*$pxToVh;
+    font-weight: bold;
+    letter-spacing: 2*$pxToVw;
+  
+  
+   
+
+
+    #start-page-btn{
+        color : $start-color;
+        position: absolute; // larger than the button
+        top:-4;              // offset 4px each sides
+        left:-4;
+        width : calc(100% + 8px);
+        height : calc(100% + 8px);
+
+        display : inline-block;  // To center text
+        @include flex(center,center,row,nowrap);
+        &:hover{
+            cursor : pointer;
+        }
+
+        
+        .outline{
+           
+            width : 100%;   // exact same size than parent a
+            height : 100%;
+            position: absolute;
+            top :0;
+            bottom: 0;
+            left :0;
+            right :0;
+            
+            
+            
+            &:hover{
+                 .top{
+                
+                  stroke-dashoffset: -205%;
+                }
+                .bot{      
+                  stroke-dashoffset: -430%;    
+                }
+            }
+      
+            &__rectangle{
+               width : calc(100% - 4px) ;  // rectangle a bit smaller than parent
+               height : calc(100% - 4px);  // to have a stroke-width of 4
+               stroke-width: 4*$pxToVw;
+               stroke-dasharray: 70% 330%; // only one dash
+               fill:none;
+               stroke: $start-color;
+               transition: stroke-dashoffset 500ms ease-in-out;
+      
+               &.top{
+                  stroke-dashoffset: -30%; // starting point
+                  }
+               &.bot{
+                  stroke-dashoffset: -205%; // starting point
+                   }
+              }
+        }
+
+    }
+
+}

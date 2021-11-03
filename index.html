@@ -6,15 +6,114 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
         <link rel="stylesheet" href="./public/css/style.css" />  
         <script type="module" src='app.js' async></script>
+        <link rel="shortcut icon" href="#">
+
+        <!-- Fonts --> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
     </head>
 
     <body>
-        <div class="main-game-view">
-            <canvas id="player"></canvas>
-            <svg id="grid" width ="100%" height="100%" >
-               
-            </svg>
+        <audio id="main-theme" src="./public/song/dofus-129-music-astrubamakna.mp3" loop="true" preload="auto" autoplay="true" muted ></audio>
+        <audio id="fight-theme" src="./public/song/dofus-129-music-combat-en-amakna.mp3" loop="true" preload="auto" autoplay="true" muted></audio>
+        <audio id="switch-song" src="./public/song/switch.wav"  preload="auto" autoplay="true" muted ></audio>
+        <canvas id="mute-songs"></canvas>
+
+        <div id="start-page">
+            <div class="text">  
+                <div class="clofus-logo"></div>
+                <p>Clofus, the almost perfect clone of "Dofus"</p>
+                <div class="start__btn">
+                    <div id="start-page-btn">Play
+                    <svg   class="outline" >
+                    <rect  x="2" y="2" rx="15" ry="15" class="outline__rectangle top"  />
+                    <rect  x="2" y="2" rx="15" ry="15" class="outline__rectangle bot"  />
+                    </svg>
+                </div> 
+                </div>
+            </div>
         </div>
+
+        <div id="home-page">
+            <svg id="home-grid" width ="100%" height="100%" > 
+            </svg>
+            <canvas id="player"></canvas>
+            <div id="portal"></div>
+            <div id="pnj-interrogation">
+                <div id="interrogation"></div>
+                <div id="pnj"></div>
+            </div>
+            <div id="pnj-text"> 
+                <div id="cross"></div>
+                <p>Hello young adventurer ! <br/> In this cave is an object of incredible power: the "Clofus pourpre". To obtain it, you will have to face the minogolem by crossing its labyrinth. If you don't feel it, you can also stay here and contemplate the view!</p>
+            </div>
+        </div>
+
+        <div id="game-page">
+
+            <svg id="game-grid" width ="100%" height="100%"> 
+            </svg>
+
+            <div class = "mob mob--blue"></div>
+            <div class = "mob mob--red"></div>
+            <div class = "mob mob--grey"></div>
+            <div class = "mob mob--green"> </div>  
+
+            <div id="pourpre"><p>Clofus pourpre</p></div>
+
+            <div class="life-pass-quit">
+                <div  class ="pv">
+                    <p class = "pv__text"></p>
+                </div>
+                <div id="pass" class = "btn">Pass</div>
+                <div id="quit" class = "btn">Quit</div>
+                
+            </div>
+            
+            <div class="Round">
+                <p class = "Round__text"></p>
+            </div>
+
+            <div class="nextRound">
+                <div class="nextRound__openClose" > </div>
+                <div class="nextRound__table">
+                </div>
+            </div>
+
+            <div class="rules">
+                <div class="rules__openClose" > </div>
+                <div class="rules__text">
+                    <h2>Rules</h2>
+                    <p>In order to catch the "Clofus pourpre", you will have to cross the labyrinth. To do this, you must anticipate the movements of the minogolem. Each turn, the minogolem will take a new state, and swap places with the minogolem of the indicated color. For example, if on the next turn, the minogolem has the red state, then it will swap places with the red minogolem. 
+                        Be careful, after switching places, the minogolem will throw a rock in front of you to try to block your way ! <br/>
+                        You have 80HP to reach the "Clofus pourpre", each turn you will lose 1HP. You are also able to pass, and to quit the game if you're getting crazy !
+                        Good luck!
+                        </p>
+                </div>
+            </div>
+
+        </div>
+        
+        <div id="end-page">
+            <div class="end-page-bloc">
+                <div id="end-page-win">
+                    <h2>Victory ! </h2>
+                    <p>You have the "Dofus pourpre" in your possession, go conquer the world !</p>
+                    <div class = "icon-win"></div>
+                    <div id="end-page-btnWin" >Play again</div>
+                </div>
+                <div id="end-page-lose">
+                    <h2>You died ! </h2>
+                    <p>The minogolem got you, don't give up !</p>
+                    <div class = "icon-lose"></div>
+                    <div id="end-page-btnLose" >Try again</div>
+                </div>
+            </div>
+        </div>
+            
+
+           
         
     </body>
 </html>

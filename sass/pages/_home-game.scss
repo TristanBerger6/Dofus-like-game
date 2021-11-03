@@ -1,0 +1,306 @@
+// --------------- HOME PAGE --------------------------//
+#home-page{
+    position : absolute;
+    width : 100vw;
+    height : 100*$vhWithRatio; 
+    background: url("../img/map.png") no-repeat;
+    background-size: 100% 100%;
+    z-index : 1;
+}
+
+#player{
+    position: absolute;
+    z-index : 99;
+}
+
+#home-grid{
+    position: absolute;
+    z-index : 10;
+}
+
+#portal{
+    width : 2vw;
+    height : 3*$vhWithRatio;
+    background : url("../img/portal5.png") no-repeat;
+    background-size : 100% 100%;
+    top : 420*$pxToVh; 
+    left : 730*$pxToVw;
+    opacity: 1;
+    position: absolute;
+    z-index : 20;
+    &:hover{
+        opacity: 0.7;
+        cursor: pointer;
+    }
+}
+
+#pnj-interrogation{
+    position: absolute;
+    z-index : 99;
+    top : calc(43*$vhWithRatio - 123*$pxToVh - 40*$pxToVh); // top in % - pnj height - interrogation height to have a ref on his foot//added
+    left : 57vw;
+    @include flex(center,center,column,nowrap);
+
+    #interrogation{
+        width : 20*$pxToVw;
+        height : 40*$pxToVh;
+        background : url("../img/interrogation.png") no-repeat;
+        background-size : 100% 100%;
+    }
+    #pnj{
+        width : 70*$pxToVw;
+        height : 123*$pxToVh; 
+        background : url("../img/pnj.png") no-repeat;
+        background-size : 100% 100%;
+        cursor : pointer;
+    }
+
+}
+
+#pnj-text{
+    position : absolute;
+    z-index : 99;
+    top : 22*$vhWithRatio;
+    left : 61vw;
+    border-radius: 5px;
+    border: 5*$pxToVw solid $home-color;
+    color :  $home-color;
+    background : $home-background;
+    text-align: justify;
+    @include flex(center,center,column,nowrap);
+    transform : scaleZ(0);
+
+    #cross{
+        align-self: flex-end;
+        margin : 5*$pxToVw;
+        width : 20*$pxToVw;
+        height : 20*$pxToVh;
+        background : url("../img/cross_dark.png") no-repeat;
+        background-size: 100% 100%;
+        cursor : pointer;
+    }
+    p{
+        width : 20vw;
+        padding: 10*$pxToVw;
+        padding-top : 0px;
+    }
+}
+
+
+// ------------ GAME PAGE ----------------------------//
+
+#game-page{
+    position : absolute;
+    width : 100vw;
+    height : 100*$vhWithRatio; //added
+    background : rgb(0, 0, 0);
+    z-index : -1;
+}
+
+.life-pass-quit{
+    position : absolute;
+    @include flex(space-between,center,row,nowrap);
+    bottom : 4*$vhWithRatio; //added
+    left : 3vw;
+    width : 280*$pxToVw;
+
+    .pv{
+        width : 88*$pxToVw;
+        height : 88*$pxToVh;
+        background : url("../img/Life4.png");
+        background-size: 100% 100%;
+        @include flex(center,center,row,nowrap);
+        &__text{
+            color :rgb(255, 255, 255);
+        }
+    
+    }
+    
+    .btn{
+        width : 70*$pxToVw;
+        height : 40*$pxToVh;
+        @include flex(center,center,row,nowrap);
+        color : $game-color;
+        background : $game-background;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px $game-box-shadow;
+        font-weight: 600;
+        &:hover{
+            cursor: pointer;
+            background : $game-hover;
+        }
+    }
+
+}
+
+
+
+.mob{
+    position : absolute;
+    z-index : 1;
+    width : 6vw;
+    height : 10*$vhWithRatio; //added
+    &:hover{
+        cursor:pointer;
+        p{
+            opacity:1;
+        } 
+    }
+    p{
+        text-align: center;
+        border-radius: 5px;
+        padding: 5*$pxToVw ;
+        background :$game-background;
+        width : 170*$pxToVw;
+        position: relative;
+        top : -70*$pxToVh;
+        color : $game-color;
+        border : 1px solid rgba(252, 252, 252, 1);
+        opacity: 0;      
+    }
+}
+
+
+.Round{
+    position : absolute;
+    width : 150*$pxToVw;
+    height : 45*$pxToVh;
+    background : $game-background;
+    color : $game-color;
+    border-radius: 5px;
+    bottom : calc(6*$vhWithRatio + 90*$pxToVh + 30*$pxToVh); // offset + life height + Round height
+    left : 3vw;
+    @include flex(center,center,row,nowrap);
+    font-weight: 600;
+    box-shadow: 2px 2px 2px rgb(100,100,100,0.2);
+    &__text{
+        font-size : 1.5rem;
+    } 
+
+}
+
+.nextRound{
+    position : absolute;
+    z-index : 4;
+    top: 20*$vhWithRatio;
+    right : 10*$pxToVw;
+    text-align: center;
+    @include flex(center,flex-start,row-reverse,nowrap);
+    width : 220*$pxToVw;
+
+
+    &__openClose{
+        position: relative;
+        top : 2px;
+        width : 20*$pxToVw;
+        height : 20*$pxToVh;
+        background : url("../img/arrow.png"),$game-background ;
+        background-size: 100% 100%;
+        cursor : pointer;
+    }
+    &__table{
+        width : 200*$pxToVw;
+        color : $game-color;
+        background : $game-background;
+        transform-origin: right;
+        transform : scaleX(1);
+        transition : transform 20ms; 
+        table{
+            width : 100%;
+            border-collapse: collapse;
+            vertical-align: center;
+        }
+        tr{
+            border: 2px solid black;
+           
+        }
+        td,th {
+            
+            padding-top : 10*$pxToVh;
+            padding-bottom: 5*$pxToVh;
+            width : 80*$pxToVw;
+        }
+    }   
+}
+
+
+
+.rock {
+    position : absolute;
+    width : 2.5vw;
+    height : 4*$vhWithRatio;
+    background : url("../img/rocks.png") no-repeat;
+    background-size : 100% 100%;
+}
+
+
+.rules{
+    position : absolute;
+    z-index : 2;
+    top: 80*$pxToVh;
+    left : 10*$pxToVw;
+    text-align: center;
+    @include flex(space-between,flex-start,row,nowrap);
+    width : 422*$pxToVw;
+
+    &__openClose{
+        position: relative;
+        width : 20*$pxToVw;
+        height : 20*$pxToVh;
+        background : url("../img/arrow.png"),$game-background ;
+        background-size: 100% 100%;
+        transform: rotateZ(180deg);
+        cursor : pointer;
+    }
+
+    &__text{
+        h2{
+            text-align: Center;
+            padding: 10*$pxToVw;
+        }
+        p{
+            padding-bottom: 20*$pxToVh;
+        }
+        width : 400*$pxToVw;
+        border-radius: 5px;
+        color : $game-color;
+        background : $game-background;
+        transform-origin: left;
+        transform : scaleX(1);
+        transition : transform 20ms; 
+        text-align: justify;
+        padding-left : 20*$pxToVw;
+        padding-right: 20*$pxToVw;
+
+    }
+
+}
+
+#pourpre{
+    position : absolute;
+    top : 0;
+    right : 0;
+    width : 50*$pxToVw;
+    height : 50*$pxToVh;
+    background: url("../img/pourpre.png") no-repeat;
+    background-size: 100%;
+    &:hover{
+        cursor : pointer;
+        p{
+            opacity : 1;
+        }
+    }
+    p{
+        position : relative;
+        text-align: center;
+        width : 200*$pxToVw;
+        padding: 5*$pxToVw;
+        background : $game-background;
+        color : $game-color;
+        border : 1px solid rgba(252, 252, 252, 1);
+        border-radius: 5px;
+        top : -60*$pxToVh;
+        left : -75*$pxToVw;
+        opacity : 0;
+    }
+}
