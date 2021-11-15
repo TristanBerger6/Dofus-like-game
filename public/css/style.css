@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Arcade";
+  src: url("../fonts/ARCADECLASSIC.TTF");
+}
+@font-face {
+  font-family: "Arcade2";
+  src: url("../fonts/PlaymegamesReguler-2OOee.ttf");
+}
 *,
 *::after,
 *::before {
@@ -9,7 +17,7 @@
 body {
   box-sizing: border-box;
   font-size: 1vw;
-  font-family: "Roboto", sans-serif;
+  font-family: "Arcade2", "Roboto", sans-serif;
   font-weight: 400;
   overflow-x: hidden;
   /*@media all and (max-width : 1024px) {
@@ -58,6 +66,7 @@ body {
   background-size: 100% 100%;
 }
 .text p {
+  margin-top: 1.0416666667vw;
   margin-bottom: 2.6041666667vw;
 }
 
@@ -337,26 +346,36 @@ body {
 .mob {
   position: absolute;
   z-index: 1;
-  width: 6vw;
-  height: 5.1041666667vw;
+  width: 3.5vw;
+  height: 3.3177083333vw;
 }
 .mob:hover {
   cursor: pointer;
 }
 .mob:hover p {
-  opacity: 1;
+  opacity: 0.8;
 }
 .mob p {
   text-align: center;
   border-radius: 5px;
   padding: 0.2604166667vw;
-  background: #26252b;
+  background: black;
   width: 8.8541666667vw;
   position: relative;
-  top: -3.6458333333vw;
+  top: -2.6041666667vw;
   color: #979699;
   border: 1px solid #fcfcfc;
   opacity: 0;
+  transform: translateX(-2.6770833333vw);
+}
+
+.mob--grey {
+  width: 6.5vw;
+  height: 5.359375vw;
+}
+.mob--grey p {
+  transform: translateX(-1.1770833333vw);
+  opacity: 0.7;
 }
 
 .Round {
@@ -384,14 +403,14 @@ body {
   position: absolute;
   z-index: 4;
   top: 10.2083333333vw;
-  right: 0.5208333333vw;
+  right: 1.5625vw;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: row-reverse;
-  flex-wrap: nowrap;
-  width: 11.4583333333vw;
+  flex-wrap: wrap;
+  width: 14.0625vw;
 }
 .nextRound__openClose {
   position: relative;
@@ -403,7 +422,7 @@ body {
   cursor: pointer;
 }
 .nextRound__table {
-  width: 10.4166666667vw;
+  width: 13.0208333333vw;
   color: #979699;
   background: #26252b;
   transform-origin: right;
@@ -420,7 +439,7 @@ body {
 }
 .nextRound__table td, .nextRound__table th {
   padding-top: 0.5208333333vw;
-  padding-bottom: 0.2604166667vw;
+  padding-bottom: 0.5208333333vw;
   width: 4.1666666667vw;
 }
 
@@ -487,20 +506,20 @@ body {
   cursor: pointer;
 }
 #pourpre:hover p {
-  opacity: 1;
+  opacity: 0.8;
 }
 #pourpre p {
   position: relative;
   text-align: center;
   width: 10.4166666667vw;
   padding: 0.2604166667vw;
-  background: #26252b;
+  background: black;
   color: #979699;
   border: 1px solid #fcfcfc;
   border-radius: 5px;
-  top: -3.125vw;
+  top: -2.0833333333vw;
   left: -3.90625vw;
-  opacity: 0;
+  opacity: 0.7;
 }
 
 /*# sourceMappingURL=style.css.map */

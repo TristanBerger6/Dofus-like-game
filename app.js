@@ -91,7 +91,8 @@ function startGame(){
 
     //prepare the game phase
     activatePortal();
-    homePageGrid.eltGrid.addEventListener("click", player.GridEventOnCallback ); 
+    homePageGrid.eltGrid.addEventListener("click", player.gridEvent ); 
+    document.addEventListener("mousemove",player.playerOrientation);
     myMob.init(); // random nextRounds and mob names
     player.PV = PVStart;
     currentRound = 1;
@@ -142,7 +143,8 @@ function activatePortal(){ // portal between home page and game page
 
 async function portalCallback(event){
     player.newMotion = true; // in case the player is currently on movement, stops him
-    homePageGrid.eltGrid.removeEventListener("click", player.GridEventOnCallback ); // disable event on home page grid
+    homePageGrid.eltGrid.removeEventListener("click", player.gridEvent ); // disable event on home page grid
+    document.removeEventListener("mousemove",player.playerOrientation);
 
     setTimeout(()=>{ // wait 1s to let time to the animation to stop
         player.movementPlayerOnClick(homePageGrid.grid[1][13].coordX,homePageGrid.grid[1][13].coordY).then(() => {

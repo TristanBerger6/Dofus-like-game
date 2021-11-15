@@ -117,7 +117,7 @@ export function gameLayoutUpdate(gamePageGrid,currentRound,myMob){
 
 function updateNextTable(currentRound,myMob){
     eltNextRoundTable[0].innerHTML = `<table> 
-    <tr> <th> Round </th> <th> State </th> </tr>
+    <tr> <th> Round </th> <th> Minogolem's state </th> </tr>
     <tr> <td> ${currentRound+1} </td> <td> ${myMob.nextRound[0]} </td> </tr> 
     <tr> <td> ${currentRound+2} </td> <td> ${myMob.nextRound[1]} </td> </tr>
     <tr> <td> ${currentRound+3} </td> <td> ${myMob.nextRound[2]} </td> </tr>
@@ -126,6 +126,3 @@ function updateNextTable(currentRound,myMob){
 }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////  GAME LAYOUT ///////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////

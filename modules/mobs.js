@@ -54,9 +54,9 @@ export class Mobs{
             let random = Math.floor(Math.random()*3) ;
             this.nextRound.push( this.randomToColor(random)); 
         }
-        this.mobList[0].elt[0].innerHTML ="<p> minogolem </p>";
+        this.mobList[0].elt[0].innerHTML ="<p> Minogolem </p>";
         for ( let i=1; i<4; i++){
-            this.mobList[i].elt[0].innerHTML ="<p>"+ this.mobList[i].color +" minogolem </p>";
+            this.mobList[i].elt[0].innerHTML ="<p>"+ this.mobList[i].color +" Minogolem </p>";
         }
         
     }

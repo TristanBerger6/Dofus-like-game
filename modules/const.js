@@ -55,8 +55,8 @@ export let gameGrid = {
 /////////////////////////////////////////////////////  
  
 // -------- start position on the home page grid  -------  //  
-export const startCellI = 0;
-export const startCellJ = 5;
+export const startCellI = 5;
+export const startCellJ = 3;
 export const PVStart = 80;
 
 // -------- start position on the game page grid  -------  //  

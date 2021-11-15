@@ -6,7 +6,7 @@ import { Dijkstra_init, Dijkstra } from './dijkstra.js'
 let animPerCell = 10;
 let forwardStepX = cellWidth/animPerCell;   // px 
 let forwardStepY = cellHeight/animPerCell;   //px
-let FPS = 60;  // 25Hz => 40ms
+let animDelay = 40 // ms
 
 
 // -------------- Canvas Player creation -----------------//
@@ -62,14 +62,35 @@ export class Player{
         // Game mode
         this.proposedCell = [];
         this.PV = PVStart;
-        this.GridEventOn();
 
     }  
 
-    async GridEventOn() {
-        this.myGrid.eltGrid.addEventListener("click", this.GridEventOnCallback );
+    // adjust the orientation of the player on mouse mouve
+    playerOrientation(event){
+        let xMousePos = event.clientX + window.scrollX;
+        let yMousePos = event.clientY + window.scrollY;
+        let deltaX = xMousePos - self.currentCell.coordX;
+        let deltaY = yMousePos - self.currentCell.coordY;
+    
+        let quadrant = [ Math.sign(deltaX), Math.sign(deltaY)]; // distance's sign between mouse and player's cell
+
+        // when the user is aiming an horizontal or verical cell
+        if ( ( quadrant[0]*deltaX <= cellWidth/2 ) && ( quadrant[1]*deltaY > cellHeight/2 ) ){
+            quadrant[0] = 0;
+        }
+        if ( ( quadrant[1]*deltaY <= cellHeight/2 ) && ( quadrant[0]*deltaX > cellWidth/2 ) ){
+            quadrant[1] = 0;
+        }
+
+        if ( self.inMotion == false && self.newMotion == false) {
+            self.ctxCanvas.clearRect(0,0,self.canvas.width,self.canvas.height);
+            let currentRow = self.quadrantToRow(quadrant); // get the row of the sprite according to the quadrant
+            self.ctxCanvas.drawImage(self.spriteImage,0,0,self.spriteImage.width,self.spriteImage.height,0,-self.canvas.height*currentRow,self.canvas.width*self.col,self.canvas.height*self.row);
+        } 
     }
-    async GridEventOnCallback(event){
+
+    // The player goes to the aimed cell on click
+    async gridEvent(event){
         this.newClick = getTimeMilli(); // To avoid spam clicking
         if ( (this.newClick - this.lastClick)<1000) { return;}  
         this.lastClick = this.newClick;
@@ -96,7 +117,7 @@ export class Player{
     }
     
 
-    // when a click is detected on the windows, bring the player to the position of the click 
+    // bring the player to the position of the click 
     async movementPlayerOnClick(xClick,yClick){
 
         this.inMotion = true; 
@@ -121,7 +142,7 @@ export class Player{
                     setTimeout(()=>{
                         this.animate(quadrant,lastCell,i);  
                         resolve();  
-                    },FPS) 
+                    },animDelay) 
                 })
                 await promise;
                     
