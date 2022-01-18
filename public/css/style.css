@@ -41,7 +41,7 @@ body {
   position: absolute;
   width: 100vw;
   height: 51.0416666667vw;
-  background: url("../img/map_blurred.png") no-repeat;
+  background: url("../img/map_blurred.webp") no-repeat;
   background-size: 100% 100%;
   z-index: 20;
   color: #362010;
@@ -62,7 +62,7 @@ body {
 .text .clofus-logo {
   width: 12.2916666667vw;
   height: 7.96875vw;
-  background: url("../img/Clofus2.png") no-repeat;
+  background: url("../img/Clofus2.webp") no-repeat;
   background-size: 100% 100%;
 }
 .text p {
@@ -192,18 +192,18 @@ body {
 }
 
 .icon-win {
-  background: url("../img/pourpre.png") no-repeat;
+  background: url("../img/pourpre.webp") no-repeat;
 }
 
 .icon-lose {
-  background: url("../img/skull.png") no-repeat;
+  background: url("../img/skull.webp") no-repeat;
 }
 
 #home-page {
   position: absolute;
   width: 100vw;
   height: 51.0416666667vw;
-  background: url("../img/map.png") no-repeat;
+  background: url("../img/map.webp") no-repeat;
   background-size: 100% 100%;
   z-index: 1;
 }
@@ -221,7 +221,7 @@ body {
 #portal {
   width: 2vw;
   height: 1.53125vw;
-  background: url("../img/portal5.png") no-repeat;
+  background: url("../img/portal5.webp") no-repeat;
   background-size: 100% 100%;
   top: 21.875vw;
   left: 38.0208333333vw;
@@ -248,13 +248,13 @@ body {
 #pnj-interrogation #interrogation {
   width: 1.0416666667vw;
   height: 2.0833333333vw;
-  background: url("../img/interrogation.png") no-repeat;
+  background: url("../img/interrogation.webp") no-repeat;
   background-size: 100% 100%;
 }
 #pnj-interrogation #pnj {
   width: 3.6458333333vw;
   height: 6.40625vw;
-  background: url("../img/pnj.png") no-repeat;
+  background: url("../img/pnj.webp") no-repeat;
   background-size: 100% 100%;
   cursor: pointer;
 }
@@ -281,7 +281,7 @@ body {
   margin: 0.2604166667vw;
   width: 1.0416666667vw;
   height: 1.0416666667vw;
-  background: url("../img/cross_dark.png") no-repeat;
+  background: url("../img/cross_dark.webp") no-repeat;
   background-size: 100% 100%;
   cursor: pointer;
 }
@@ -313,7 +313,7 @@ body {
 .life-pass-quit .pv {
   width: 4.5833333333vw;
   height: 4.5833333333vw;
-  background: url("../img/Life4.png");
+  background: url("../img/Life4.webp");
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
@@ -417,7 +417,7 @@ body {
   top: 2px;
   width: 1.0416666667vw;
   height: 1.0416666667vw;
-  background: url("../img/arrow.png"), #26252b;
+  background: url("../img/arrow.webp"), #26252b;
   background-size: 100% 100%;
   cursor: pointer;
 }
@@ -447,7 +447,7 @@ body {
   position: absolute;
   width: 2.5vw;
   height: 2.0416666667vw;
-  background: url("../img/rocks.png") no-repeat;
+  background: url("../img/rocks.webp") no-repeat;
   background-size: 100% 100%;
 }
 
@@ -468,7 +468,7 @@ body {
   position: relative;
   width: 1.0416666667vw;
   height: 1.0416666667vw;
-  background: url("../img/arrow.png"), #26252b;
+  background: url("../img/arrow.webp"), #26252b;
   background-size: 100% 100%;
   transform: rotateZ(180deg);
   cursor: pointer;
@@ -499,7 +499,7 @@ body {
   right: 0;
   width: 2.6041666667vw;
   height: 2.6041666667vw;
-  background: url("../img/pourpre.png") no-repeat;
+  background: url("../img/pourpre.webp") no-repeat;
   background-size: 100%;
 }
 #pourpre:hover {
