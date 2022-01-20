@@ -7,6 +7,11 @@ import { audioInit, audioMainTheme, audioFightTheme, audioSwitch } from "./modul
 import { getTimeMilli } from "./modules/utils.js";
 
 window.addEventListener ('resize', ()=> location.reload()); // reload on resize
+window.addEventListener('load', ()=>{
+    if ( (window.innerWidth <= 800) && (window.innerHeight <= 600) ){
+        alert('This game is not optimized for small screen')
+    }
+})
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////  VARIABLES ///////////////////////////////////////////////////////////////////

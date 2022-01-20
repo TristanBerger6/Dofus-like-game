@@ -7,6 +7,8 @@
 This game includes a home map where the player can move freely thanks to the implementation of Dijkstra pathfinding algorithm.
 Then, the player has access to a tactical battle against a monster when entering the cave. The goal is to cross the minogolem's labyrinth to obtain a very powerful object.
 
+/!\ The game is not optimized for mobile 
+
 ## The difficulty 
 
 The principle of this tactical battle is taken from the game dofus itself. Normally, in dofus, there are no rules given to the player to perform this fight. The player has to die and re-try until he understands the ins and outs of the fight. 
