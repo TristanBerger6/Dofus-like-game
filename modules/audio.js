@@ -12,7 +12,7 @@ let muted = false;
 
 export function audioInit(){
     let muteImg = new Image();
-    muteImg.src = "./public/img/mute4.png";
+    muteImg.src = "./public/img/mute4.webp";
     muteImg.onload = () =>{
     ctxMute.drawImage(muteImg,0,0,muteImg.width,muteImg.height,0,0,eltMuteIcon.width*2,eltMuteIcon.height);        
     }

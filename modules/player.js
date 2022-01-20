@@ -20,7 +20,7 @@ playerCanvas.height = Math.round(100*vh/980);
 // ------------------ Sprite --------------------------------//
 let spriteRow = 8;
 let spriteCol = 11;
-let spriteUrl = "./public/img/sprite_global.png";
+let spriteUrl = "./public/img/sprite_global.webp";
 
 
 //  ------------------- Sprite class ------------------------//

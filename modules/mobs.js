@@ -8,7 +8,7 @@ class Mob{ // 1 mob = 1 minogolem
         this.posCoord = posCoord;
         this.elt[0].style.top = this.posCoord[0];
         this.elt[0].style.left = this.posCoord[1];
-        this.elt[0].style.background = `url('./public/img/minogolem_${this.color}.png')`;
+        this.elt[0].style.background = `url('./public/img/minogolem_${this.color}.webp')`;
         this.elt[0].style.backgroundSize = "100% 100%";
     }
 }
